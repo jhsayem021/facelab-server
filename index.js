@@ -152,6 +152,14 @@ async function run() {
       const result = await postCollection.find().toArray();
       res.send(result);
     })
+    app.get('/checkserver', async (req, res) => {
+      const  demo = {
+        name: "jahid",
+        age: 25
+      }
+      
+      res.send(demo);
+    })
 
 
 
