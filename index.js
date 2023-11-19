@@ -48,7 +48,7 @@ async function run() {
     // Connect the client to the server	(optional starting in v4.7)
     await client.connect();
 
-    // Facelab database 
+    // Facelab database noSQL
     const usersCollection = client.db("facelabdb").collection("users");
     const postCollection = client.db("facelabdb").collection("feedposts");
     const reactionCollection = client.db("facelabdb").collection("postReact");
@@ -109,7 +109,7 @@ async function run() {
       const result = await commentCollection.insertOne(newComment)
       res.send(result);
     })
-    app.get('/postComment',  async (req, res) => {
+    app.get('/postComment', verifyJWT,  async (req, res) => {
       const id = req.query.id;
       console.log(id);
       const query = { postId: id };
@@ -140,7 +140,7 @@ async function run() {
       console.log(result );
       res.send(result);
     })
-    app.get('/singlepost',  async (req, res) => {
+    app.get('/singlepost', verifyJWT,  async (req, res) => {
       const id = req.query.id;
       console.log(id);
       const query = { postId: id };
